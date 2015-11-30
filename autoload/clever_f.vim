@@ -8,6 +8,7 @@ let g:clever_f_fix_key_direction       = get(g:, 'clever_f_fix_key_direction', 0
 let g:clever_f_show_prompt             = get(g:, 'clever_f_show_prompt', 0)
 let g:clever_f_smart_case              = get(g:, 'clever_f_smart_case', 0)
 let g:clever_f_chars_match_any_signs   = get(g:, 'clever_f_chars_match_any_signs', '')
+let g:clever_f_chars_match_signs       = get(g:, 'clever_f_chars_match_signs', '')
 let g:clever_f_mark_cursor             = get(g:, 'clever_f_mark_cursor', 1)
 let g:clever_f_hide_cursor_on_cmdline  = get(g:, 'clever_f_hide_cursor_on_cmdline', 1)
 let g:clever_f_timeout_ms              = get(g:, 'clever_f_timeout_ms', 0)
@@ -318,6 +319,14 @@ function! s:load_migemo_dict()
     endif
 endfunction
 
+function! s:get_any_sign_regex()
+    if g:clever_f_chars_match_signs ==# ''
+        return '\[!"#$%&''()=~|\-^\\@`[\]{};:+*<>,.?_/]'
+    endif
+
+    return '\[' . escape(g:clever_f_chars_match_signs, ']') . ']'
+endfunction
+
 function! s:generate_pattern(map, char_num)
     let char = type(a:char_num) == type(0) ? nr2char(a:char_num) : a:char_num
     let regex = char
@@ -329,7 +338,7 @@ function! s:generate_pattern(map, char_num)
         endif
         let regex = s:migemo_dicts[&l:encoding][regex] . '\&\%(' . char . '\|\A\)'
     elseif stridx(g:clever_f_chars_match_any_signs, char) != -1
-        let regex = '\[!"#$%&''()=~|\-^\\@`[\]{};:+*<>,.?_/]'
+        let regex = s:get_any_sign_regex()
     endif
 
     if a:map ==# 't'
