@@ -50,7 +50,7 @@ describe 'Default settings'
         Expect 'g:clever_f_show_prompt' to_exist_and_default_to 0
         Expect 'g:clever_f_smart_case' to_exist_and_default_to 0
         Expect 'g:clever_f_chars_match_any_signs' to_exist_and_default_to ''
-        Expect 'g:clever_f_chars_match_signs' to_exist_and_default_to ''
+        Expect 'g:clever_f_any_signs_match_signs' to_exist_and_default_to ''
         Expect 'g:clever_f_mark_cursor_color' to_exist_and_default_to 'Cursor'
         Expect 'g:clever_f_mark_cursor' to_exist_and_default_to 1
         Expect 'g:clever_f_hide_cursor_on_cmdline' to_exist_and_default_to 1
@@ -923,7 +923,7 @@ describe 'g:clever_f_repeat_last_char_inputs'
     end
 end
 
-describe 'g:clever_f_chars_match_signs'
+describe 'g:clever_f_any_signs_match_signs'
 
     before
         new
@@ -933,7 +933,7 @@ describe 'g:clever_f_chars_match_signs'
     end
 
     it 'allows to match to all signs if empty'
-        let g:clever_f_chars_match_signs = ''
+        let g:clever_f_any_signs_match_signs = ''
         normal f;
         Expect col('.') == 2
         for i in range(3, 34)
@@ -944,7 +944,7 @@ describe 'g:clever_f_chars_match_signs'
     end
 
     it 'allows to match to specified characters'
-        let g:clever_f_chars_match_signs = '&'',_'
+        let g:clever_f_any_signs_match_signs = '&'',_'
         normal f;
         for i in [7, 8, 30, 33]
             Expect col('.') == i
@@ -954,7 +954,7 @@ describe 'g:clever_f_chars_match_signs'
     end
 
     it 'can handle escape-needed characters'
-        let g:clever_f_chars_match_signs = ']'
+        let g:clever_f_any_signs_match_signs = ']'
         normal f;
         Expect col('.') == 21
         Expect getline('.')[col('.')-1] ==# ']'
@@ -964,7 +964,7 @@ describe 'g:clever_f_chars_match_signs'
     after
         close!
         let g:clever_f_chars_match_any_signs = ''
-        let g:clever_f_chars_match_signs = ''
+        let g:clever_f_any_signs_match_signs = ''
     end
 
 end
