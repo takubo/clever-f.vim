@@ -144,7 +144,19 @@ g:clever_f_chars_match_any_signs              *g:clever_f_chars_match_any_signs*
     move :  _-->_--->_--------->_>_>_------------>_>_
     text :  hoge.huga( autoloads: %w{ aaa bbb ccc } )
 <
+g:clever_f_chars_match_any_signs              *g:clever_f_chars_match_any_signs*
 
+    The value must be string. If this variable is not empty, any-signs match
+    only matches to the signs in the string.  Below is an example when this
+    variable is set to "(){}%".  It may be useful to specify only signs which
+    needs shift-key.
+    The default value is "".
+
+>
+    input:   f;   f       f      f f       f       f
+    move :  _------->_----------->_>_------------>_>_
+    text :  hoge.huga( autoloads: %w{ aaa bbb ccc } )
+<
 g:clever_f_mark_cursor                                  *g:clever_f_mark_cursor*
 
     If the value is equivalent to 1, current cursor position will be
