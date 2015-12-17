@@ -144,7 +144,7 @@ g:clever_f_any_signs_match_signs              *g:clever_f_any_signs_match_signs*
     move :  _-->_--->_--------->_>_>_------------>_>_
     text :  hoge.huga( autoloads: %w{ aaa bbb ccc } )
 <
-g:clever_f_any_signs_match_signs              *g:clever_f_any_signs_match_signs*
+g:clever_f_chars_match_any_signs              *g:clever_f_chars_match_any_signs*
 
     The value must be string. If this variable is not empty, any-signs match
     only matches to the signs in the string. It may be useful to specify only
